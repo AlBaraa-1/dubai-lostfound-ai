@@ -105,7 +105,7 @@ export default function ReportFoundView() {
         {/* Image Upload */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {t('lost_form_item_photo')} <span className="text-red-500">*</span>
+            {t('found_form_item_photo')} <span className="text-red-500">*</span>
           </label>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-400 transition-colors">
             {formData.imagePreview ? (
@@ -122,14 +122,14 @@ export default function ReportFoundView() {
                   }
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  {t('lost_remove_image')}
+                  {t('found_remove_image')}
                 </button>
               </div>
             ) : (
               <label className="cursor-pointer">
                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-600 mb-2">{t('lost_upload_click')}</p>
-                <p className="text-sm text-gray-500">{t('lost_upload_formats')}</p>
+                <p className="text-gray-600 mb-2">{t('found_upload_click')}</p>
+                <p className="text-sm text-gray-500">{t('found_upload_formats')}</p>
                 <input
                   type="file"
                   accept="image/*"
@@ -154,7 +154,7 @@ export default function ReportFoundView() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               required
             >
-              <option value="">{t('lost_form_location_type_placeholder')}</option>
+              <option value="">{t('found_form_location_type_placeholder')}</option>
               {whereOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -174,7 +174,7 @@ export default function ReportFoundView() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               required
             >
-              <option value="">{t('lost_form_time_frame_placeholder')}</option>
+              <option value="">{t('found_form_time_frame_placeholder')}</option>
               {whenOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -187,11 +187,11 @@ export default function ReportFoundView() {
         {/* Specific Place */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {t('lost_form_specific_place')}
+            {t('found_form_specific_place')}
           </label>
           <input
             type="text"
-            placeholder={t('lost_form_specific_place_placeholder')}
+            placeholder={t('found_form_specific_place_placeholder')}
             value={formData.specificPlace}
             onChange={(e) => setFormData((prev) => ({ ...prev, specificPlace: e.target.value }))}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
@@ -201,10 +201,10 @@ export default function ReportFoundView() {
         {/* Description */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            {t('lost_form_notes_label')}
+            {t('found_form_notes_label')}
           </label>
           <textarea
-            placeholder={t('lost_form_notes_placeholder')}
+            placeholder={t('found_form_notes_placeholder')}
             value={formData.description}
             onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
             rows={3}
