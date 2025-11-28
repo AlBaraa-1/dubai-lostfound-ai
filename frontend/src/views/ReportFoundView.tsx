@@ -90,7 +90,7 @@ export default function ReportFoundView() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Report a Found Item</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Report a Lost Item</h1>
         <p className="text-lg text-gray-600">
           Upload a photo of the item you found and tell us where and when. We'll check if anyone
           has reported it as lost.
@@ -141,24 +141,47 @@ export default function ReportFoundView() {
           </div>
         </div>
 
-        {/* Where */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Where did you find it? <span className="text-red-500">*</span>
-          </label>
-          <select
-            value={formData.where}
-            onChange={(e) => setFormData((prev) => ({ ...prev, where: e.target.value }))}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
-          >
-            <option value="">Select a location type</option>
-            {whereOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+        {/* Where and When - Side by Side */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          {/* Where */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Where did you find it? <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={formData.where}
+              onChange={(e) => setFormData((prev) => ({ ...prev, where: e.target.value }))}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              required
+            >
+              <option value="">Select a location type</option>
+              {whereOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* When */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              When did you find it? <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={formData.when}
+              onChange={(e) => setFormData((prev) => ({ ...prev, when: e.target.value }))}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              required
+            >
+              <option value="">Select a time frame</option>
+              {whenOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Specific Place */}
@@ -173,26 +196,6 @@ export default function ReportFoundView() {
             onChange={(e) => setFormData((prev) => ({ ...prev, specificPlace: e.target.value }))}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
-        </div>
-
-        {/* When */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            When did you find it? <span className="text-red-500">*</span>
-          </label>
-          <select
-            value={formData.when}
-            onChange={(e) => setFormData((prev) => ({ ...prev, when: e.target.value }))}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
-          >
-            <option value="">Select a time frame</option>
-            {whenOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* Description */}
