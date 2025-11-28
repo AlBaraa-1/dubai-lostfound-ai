@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Upload, Loader2 } from 'lucide-react';
-import { ItemFormData, Match } from '../types';
-import { submitLostItem } from '../api';
+import { ItemFormData } from '../types';
+import { submitLostItem, buildImageUrl, MatchResult } from '../api/lostFoundApi';
 import MatchCard from '../components/MatchCard';
 
 const whereOptions = [
@@ -27,9 +27,10 @@ export default function ReportLostView() {
     description: '',
   });
 
-  const [matches, setMatches] = useState<Match[]>([]);
+  const [matches, setMatches] = useState<MatchResult[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMatches, setShowMatches] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -53,14 +54,34 @@ export default function ReportLostView() {
 
     setIsSubmitting(true);
     setShowMatches(false);
+    setError(null);
 
     try {
-      const results = await submitLostItem(formData);
-      setMatches(results);
+      const payload = {
+        file: formData.image!,
+        title: formData.description || `Lost item at ${formData.where}`,
+        description: formData.description || undefined,
+        locationType: formData.where,
+        locationDetail: formData.specificPlace || undefined,
+        timeFrame: formData.when,
+      };
+
+      const response = await submitLostItem(payload);
+      setMatches(response.matches);
       setShowMatches(true);
+
+      // Reset form after successful submission
+      setFormData({
+        image: null,
+        imagePreview: undefined,
+        where: '',
+        specificPlace: '',
+        when: '',
+        description: '',
+      });
     } catch (error) {
       console.error('Error submitting lost item:', error);
-      alert('Something went wrong. Please try again.');
+      setError(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -206,6 +227,13 @@ export default function ReportLostView() {
             'Find possible matches'
           )}
         </button>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            {error}
+          </div>
+        )}
       </form>
 
       {/* Matches Section */}
@@ -214,9 +242,26 @@ export default function ReportLostView() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">AI Suggested Matches</h2>
           {matches.length > 0 ? (
             <div className="space-y-4">
-              {matches.map((match) => (
-                <MatchCard key={match.id} match={match} />
-              ))}
+              {matches.map((matchResult) => {
+                // Convert MatchResult to Match format for MatchCard
+                const match = {
+                  id: matchResult.item.id.toString(),
+                  item: {
+                    id: matchResult.item.id.toString(),
+                    type: 'found' as const,
+                    imageUrl: buildImageUrl(matchResult.item.image_url),
+                    where: matchResult.item.location_type || 'Unknown',
+                    specificPlace: matchResult.item.location_detail || undefined,
+                    when: matchResult.item.time_frame || 'Unknown',
+                    description: matchResult.item.description || matchResult.item.title || 'No description',
+                    timestamp: new Date(matchResult.item.created_at),
+                  },
+                  similarity: Math.round(matchResult.similarity * 100),
+                  status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+                };
+                
+                return <MatchCard key={match.id} match={match} />;
+              })}
             </div>
           ) : (
             <div className="text-center py-12">

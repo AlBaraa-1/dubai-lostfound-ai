@@ -1,15 +1,30 @@
 import { useState, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
-import { UserActivity } from '../types';
-import { fetchUserActivity } from '../api';
+import { Item, Match } from '../types';
+import { fetchHistory, buildImageUrl, HistoryResponse, ItemInDBBase } from '../api/lostFoundApi';
 import MatchCard from '../components/MatchCard';
 
 type TabType = 'lost' | 'found';
 
+// Helper function to convert backend item to frontend Item type
+const convertToItem = (dbItem: ItemInDBBase, type: 'lost' | 'found'): Item => ({
+  id: dbItem.id.toString(),
+  type,
+  imageUrl: buildImageUrl(dbItem.image_url),
+  where: dbItem.location_type || 'Unknown',
+  specificPlace: dbItem.location_detail || undefined,
+  when: dbItem.time_frame || 'Unknown',
+  description: dbItem.description || dbItem.title || 'No description',
+  timestamp: new Date(dbItem.created_at),
+});
+
 export default function MatchesView() {
   const [activeTab, setActiveTab] = useState<TabType>('lost');
-  const [activity, setActivity] = useState<UserActivity | null>(null);
+  const [lostItems, setLostItems] = useState<Item[]>([]);
+  const [foundItems, setFoundItems] = useState<Item[]>([]);
+  const [matches, setMatches] = useState<Record<string, Match[]>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadActivity();
@@ -17,11 +32,67 @@ export default function MatchesView() {
 
   const loadActivity = async () => {
     setIsLoading(true);
+    setError(null);
+    
     try {
-      const data = await fetchUserActivity();
-      setActivity(data);
+      const data = await fetchHistory();
+      
+      // Convert backend items with matches to frontend format
+      const convertedLostItems = data.lost_items.map(itemWithMatches => 
+        convertToItem(itemWithMatches.item, 'lost')
+      );
+      const convertedFoundItems = data.found_items.map(itemWithMatches => 
+        convertToItem(itemWithMatches.item, 'found')
+      );
+      
+      setLostItems(convertedLostItems);
+      setFoundItems(convertedFoundItems);
+      
+      // Build matches map from the backend response
+      const matchesMap: Record<string, Match[]> = {};
+      
+      data.lost_items.forEach(itemWithMatches => {
+        const itemId = itemWithMatches.item.id.toString();
+        matchesMap[itemId] = itemWithMatches.matches.map(matchResult => ({
+          id: matchResult.item.id.toString(),
+          item: {
+            id: matchResult.item.id.toString(),
+            type: 'found' as const,
+            imageUrl: buildImageUrl(matchResult.item.image_url),
+            where: matchResult.item.location_type || 'Unknown',
+            specificPlace: matchResult.item.location_detail || undefined,
+            when: matchResult.item.time_frame || 'Unknown',
+            description: matchResult.item.description || matchResult.item.title || 'No description',
+            timestamp: new Date(matchResult.item.created_at),
+          },
+          similarity: Math.round(matchResult.similarity * 100),
+          status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+        }));
+      });
+      
+      data.found_items.forEach(itemWithMatches => {
+        const itemId = itemWithMatches.item.id.toString();
+        matchesMap[itemId] = itemWithMatches.matches.map(matchResult => ({
+          id: matchResult.item.id.toString(),
+          item: {
+            id: matchResult.item.id.toString(),
+            type: 'lost' as const,
+            imageUrl: buildImageUrl(matchResult.item.image_url),
+            where: matchResult.item.location_type || 'Unknown',
+            specificPlace: matchResult.item.location_detail || undefined,
+            when: matchResult.item.time_frame || 'Unknown',
+            description: matchResult.item.description || matchResult.item.title || 'No description',
+            timestamp: new Date(matchResult.item.created_at),
+          },
+          similarity: Math.round(matchResult.similarity * 100),
+          status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+        }));
+      });
+      
+      setMatches(matchesMap);
     } catch (error) {
       console.error('Error loading activity:', error);
+      setError(error instanceof Error ? error.message : 'Unable to load activity');
     } finally {
       setIsLoading(false);
     }
@@ -35,15 +106,23 @@ export default function MatchesView() {
     );
   }
 
-  if (!activity) {
+  if (error) {
     return (
       <div className="text-center py-20">
-        <p className="text-gray-600 text-lg">Unable to load activity. Please try again.</p>
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+          <p className="text-red-700 text-lg mb-3">{error}</p>
+          <button
+            onClick={loadActivity}
+            className="text-sm text-red-600 hover:text-red-800 font-medium"
+          >
+            Try again
+          </button>
+        </div>
       </div>
     );
   }
 
-  const items = activeTab === 'lost' ? activity.lostItems : activity.foundItems;
+  const items = activeTab === 'lost' ? lostItems : foundItems;
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -67,7 +146,7 @@ export default function MatchesView() {
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
-            Lost items I reported ({activity.lostItems.length})
+            Lost items I reported ({lostItems.length})
           </button>
           <button
             onClick={() => setActiveTab('found')}
@@ -77,7 +156,7 @@ export default function MatchesView() {
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
-            Found items I reported ({activity.foundItems.length})
+            Found items I reported ({foundItems.length})
           </button>
         </div>
       </div>
@@ -92,7 +171,7 @@ export default function MatchesView() {
       ) : (
         <div className="space-y-6">
           {items.map((item) => {
-            const itemMatches = activity.matches[item.id] || [];
+            const itemMatches = matches[item.id] || [];
 
             return (
               <div key={item.id} className="bg-white rounded-xl shadow-md overflow-hidden">
