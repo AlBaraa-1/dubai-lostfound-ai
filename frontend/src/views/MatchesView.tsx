@@ -53,7 +53,9 @@ export default function MatchesView() {
       
       data.lost_items.forEach(itemWithMatches => {
         const itemId = itemWithMatches.item.id.toString();
-        matchesMap[itemId] = itemWithMatches.matches.map(matchResult => ({
+        matchesMap[itemId] = itemWithMatches.matches
+          .filter(matchResult => matchResult.similarity >= 0.5)
+          .map(matchResult => ({
           id: matchResult.item.id.toString(),
           item: {
             id: matchResult.item.id.toString(),
@@ -66,13 +68,15 @@ export default function MatchesView() {
             timestamp: new Date(matchResult.item.created_at),
           },
           similarity: Math.round(matchResult.similarity * 100),
-          status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+          status: (matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
         }));
       });
       
       data.found_items.forEach(itemWithMatches => {
         const itemId = itemWithMatches.item.id.toString();
-        matchesMap[itemId] = itemWithMatches.matches.map(matchResult => ({
+        matchesMap[itemId] = itemWithMatches.matches
+          .filter(matchResult => matchResult.similarity >= 0.5)
+          .map(matchResult => ({
           id: matchResult.item.id.toString(),
           item: {
             id: matchResult.item.id.toString(),
@@ -85,7 +89,7 @@ export default function MatchesView() {
             timestamp: new Date(matchResult.item.created_at),
           },
           similarity: Math.round(matchResult.similarity * 100),
-          status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+          status: (matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
         }));
       });
       

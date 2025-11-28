@@ -237,31 +237,47 @@ export default function ReportLostView() {
       </form>
 
       {/* Matches Section */}
-      {showMatches && (
+      {showMatches && (() => {
+        const filteredMatches = matches.filter(m => m.similarity >= 0.5);
+        return (
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">AI Suggested Matches</h2>
-          {matches.length > 0 ? (
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">AI Suggested Matches</h2>
+          
+          {/* Match Count Message */}
+          {filteredMatches.length > 0 ? (
+            <p className="text-gray-600 mb-6">
+              We found {filteredMatches.length} {filteredMatches.length === 1 ? 'possible match' : 'possible matches'}
+            </p>
+          ) : (
+            <p className="text-gray-600 mb-6">
+              No matches yet – we'll notify you when we find something.
+            </p>
+          )}
+          
+          {filteredMatches.length > 0 ? (
             <div className="space-y-4">
-              {matches.map((matchResult) => {
-                // Convert MatchResult to Match format for MatchCard
-                const match = {
-                  id: matchResult.item.id.toString(),
-                  item: {
+              {matches
+                .filter(matchResult => matchResult.similarity >= 0.5)
+                .map((matchResult) => {
+                  // Convert MatchResult to Match format for MatchCard
+                  const match = {
                     id: matchResult.item.id.toString(),
-                    type: 'found' as const,
-                    imageUrl: buildImageUrl(matchResult.item.image_url),
-                    where: matchResult.item.location_type || 'Unknown',
-                    specificPlace: matchResult.item.location_detail || undefined,
-                    when: matchResult.item.time_frame || 'Unknown',
-                    description: matchResult.item.description || matchResult.item.title || 'No description',
-                    timestamp: new Date(matchResult.item.created_at),
-                  },
-                  similarity: Math.round(matchResult.similarity * 100),
-                  status: (matchResult.similarity >= 0.9 ? 'exact' : matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
-                };
-                
-                return <MatchCard key={match.id} match={match} />;
-              })}
+                    item: {
+                      id: matchResult.item.id.toString(),
+                      type: 'found' as const,
+                      imageUrl: buildImageUrl(matchResult.item.image_url),
+                      where: matchResult.item.location_type || 'Unknown',
+                      specificPlace: matchResult.item.location_detail || undefined,
+                      when: matchResult.item.time_frame || 'Unknown',
+                      description: matchResult.item.description || matchResult.item.title || 'No description',
+                      timestamp: new Date(matchResult.item.created_at),
+                    },
+                    similarity: Math.round(matchResult.similarity * 100),
+                    status: (matchResult.similarity >= 0.75 ? 'high' : 'possible') as 'possible' | 'high' | 'exact',
+                  };
+                  
+                  return <MatchCard key={match.id} match={match} />;
+                })}
             </div>
           ) : (
             <div className="text-center py-12">
@@ -274,7 +290,8 @@ export default function ReportLostView() {
             </div>
           )}
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

@@ -135,8 +135,11 @@ def item_to_response(item: models.Item, base_url: str = "") -> schemas.ItemInDBB
         ItemInDBBase schema instance
     """
     # Construct image URL
-    # Format: /media/{type}/{filename}
-    image_url = f"/media/{item.type}/{item.image_path.split('/')[-1]}"
+    # image_path is stored as "lost/filename.jpg" or "found\filename.jpg"
+    # We need to extract just the filename and construct: /media/lost/filename.jpg
+    from pathlib import Path
+    filename = Path(item.image_path).name
+    image_url = f"/media/{item.type}/{filename}"
     
     return schemas.ItemInDBBase(
         id=item.id,
