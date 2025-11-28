@@ -54,8 +54,8 @@ A FastAPI backend uses a pretrained CNN to compute image embeddings and return t
 ### Backend
 
 ```bash
-git clone https://github.com/AlBaraa-1/dubai-ai-lost-and-found.git
-cd dubai-ai-lost-and-found
+git clone https://github.com/AlBaraa-1docs/app-business-canvas.md/dubai-lostfound-ai.git
+cd dubai-lostfound-ai
 
 python -m venv .venv
 # Windows: .venv\Scripts\activate
