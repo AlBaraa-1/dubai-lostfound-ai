@@ -3,6 +3,7 @@ import { Upload, Loader2 } from 'lucide-react';
 import { ItemFormData } from '../types';
 import { submitFoundItem, buildImageUrl, MatchResult } from '../api/lostFoundApi';
 import MatchCard from '../components/MatchCard';
+import { useLanguage } from '../context/LanguageContext';
 
 const whereOptions = [
   'Mall',
@@ -18,6 +19,7 @@ const whereOptions = [
 const whenOptions = ['Today', 'Yesterday', 'Last 3 days', 'Last week', 'Earlier'];
 
 export default function ReportFoundView() {
+  const { t, dir } = useLanguage();
   const [formData, setFormData] = useState<ItemFormData>({
     image: null,
     imagePreview: undefined,
@@ -88,16 +90,14 @@ export default function ReportFoundView() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto" dir={dir}>
       <div className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Report a Lost Item</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">{t('found_page_title')}</h1>
         <p className="text-lg text-gray-600">
-          Upload a photo of the item you found and tell us where and when. We'll check if anyone
-          has reported it as lost.
+          {t('found_page_subtitle')}
         </p>
         <p className="text-sm text-gray-500 mt-2 bg-blue-50 border border-blue-200 rounded-lg p-3">
-          🔒 <strong>Privacy note:</strong> In the full version, faces and IDs will be
-          automatically blurred before processing.
+          🔒 <strong>{t('privacy_note')}</strong> {t('privacy_banner')}
         </p>
       </div>
 
@@ -105,7 +105,7 @@ export default function ReportFoundView() {
         {/* Image Upload */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Item photo <span className="text-red-500">*</span>
+            {t('lost_form_item_photo')} <span className="text-red-500">*</span>
           </label>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-400 transition-colors">
             {formData.imagePreview ? (
@@ -122,14 +122,14 @@ export default function ReportFoundView() {
                   }
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  Remove image
+                  {t('lost_remove_image')}
                 </button>
               </div>
             ) : (
               <label className="cursor-pointer">
                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-600 mb-2">Click to upload or drag and drop</p>
-                <p className="text-sm text-gray-500">PNG, JPG up to 10MB</p>
+                <p className="text-gray-600 mb-2">{t('lost_upload_click')}</p>
+                <p className="text-sm text-gray-500">{t('lost_upload_formats')}</p>
                 <input
                   type="file"
                   accept="image/*"
@@ -146,7 +146,7 @@ export default function ReportFoundView() {
           {/* Where */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Where did you find it? <span className="text-red-500">*</span>
+              {t('found_form_where_question')} <span className="text-red-500">*</span>
             </label>
             <select
               value={formData.where}
@@ -154,7 +154,7 @@ export default function ReportFoundView() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               required
             >
-              <option value="">Select a location type</option>
+              <option value="">{t('lost_form_location_type_placeholder')}</option>
               {whereOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -166,7 +166,7 @@ export default function ReportFoundView() {
           {/* When */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              When did you find it? <span className="text-red-500">*</span>
+              {t('found_form_when_question')} <span className="text-red-500">*</span>
             </label>
             <select
               value={formData.when}
@@ -174,7 +174,7 @@ export default function ReportFoundView() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               required
             >
-              <option value="">Select a time frame</option>
+              <option value="">{t('lost_form_time_frame_placeholder')}</option>
               {whenOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -187,11 +187,11 @@ export default function ReportFoundView() {
         {/* Specific Place */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Specific place (optional)
+            {t('lost_form_specific_place')}
           </label>
           <input
             type="text"
-            placeholder="e.g., Dubai Mall, Level 2"
+            placeholder={t('lost_form_specific_place_placeholder')}
             value={formData.specificPlace}
             onChange={(e) => setFormData((prev) => ({ ...prev, specificPlace: e.target.value }))}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
@@ -201,10 +201,10 @@ export default function ReportFoundView() {
         {/* Description */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Short description (optional)
+            {t('lost_form_notes_label')}
           </label>
           <textarea
-            placeholder="Black leather wallet with a silver keychain."
+            placeholder={t('lost_form_notes_placeholder')}
             value={formData.description}
             onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
             rows={3}
@@ -221,10 +221,10 @@ export default function ReportFoundView() {
           {isSubmitting ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Checking for owners...
+              {t('found_form_submitting')}
             </>
           ) : (
-            'Check for owners'
+            t('found_form_submit')
           )}
         </button>
 
@@ -241,16 +241,16 @@ export default function ReportFoundView() {
         const filteredMatches = matches.filter(m => m.similarity >= 0.5);
         return (
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">AI Suggested Matches</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('found_ai_matches_title')}</h2>
           
           {/* Match Count Message */}
           {filteredMatches.length > 0 ? (
             <p className="text-gray-600 mb-6">
-              We found {filteredMatches.length} {filteredMatches.length === 1 ? 'possible match' : 'possible matches'}
+              {t('found_matches_found').replace('{count}', filteredMatches.length.toString())}
             </p>
           ) : (
             <p className="text-gray-600 mb-6">
-              No matches yet – we'll notify you when we find something.
+              {t('found_ai_matches_empty')}
             </p>
           )}
           

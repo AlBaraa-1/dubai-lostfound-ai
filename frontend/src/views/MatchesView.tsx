@@ -3,6 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { Item, Match } from '../types';
 import { fetchHistory, buildImageUrl, HistoryResponse, ItemInDBBase } from '../api/lostFoundApi';
 import MatchCard from '../components/MatchCard';
+import { useLanguage } from '../context/LanguageContext';
 
 type TabType = 'lost' | 'found';
 
@@ -19,6 +20,7 @@ const convertToItem = (dbItem: ItemInDBBase, type: 'lost' | 'found'): Item => ({
 });
 
 export default function MatchesView() {
+  const { t, dir } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabType>('lost');
   const [lostItems, setLostItems] = useState<Item[]>([]);
   const [foundItems, setFoundItems] = useState<Item[]>([]);
@@ -129,10 +131,10 @@ export default function MatchesView() {
   const items = activeTab === 'lost' ? lostItems : foundItems;
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto" dir={dir}>
       <div className="mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-          My Matches & Activity
+          {t('matches_page_title')}
         </h1>
         <p className="text-lg text-gray-600">
           View your reported items and see potential matches from our AI system.
@@ -150,7 +152,7 @@ export default function MatchesView() {
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
-            Lost items I reported ({lostItems.length})
+            {t('matches_tab_lost')} ({lostItems.length})
           </button>
           <button
             onClick={() => setActiveTab('found')}
@@ -160,7 +162,7 @@ export default function MatchesView() {
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
-            Found items I reported ({foundItems.length})
+            {t('matches_tab_found')} ({foundItems.length})
           </button>
         </div>
       </div>
@@ -169,7 +171,7 @@ export default function MatchesView() {
       {items.length === 0 ? (
         <div className="bg-white rounded-xl shadow-md p-12 text-center">
           <p className="text-gray-600 text-lg">
-            You haven't reported any {activeTab} items yet.
+            {activeTab === 'lost' ? t('matches_no_items_lost') : t('matches_no_items_found')}
           </p>
         </div>
       ) : (

@@ -1,0 +1,222 @@
+/**
+ * Translations for Dubai AI Lost & Found
+ * Supports English (EN) and Arabic (AR)
+ */
+
+export type SupportedLanguage = "en" | "ar";
+
+export const translations: Record<SupportedLanguage, Record<string, string>> = {
+  en: {
+    app_title: "Dubai AI Lost & Found",
+    app_tagline: "Privacy-first, AI-powered lost & found platform for Dubai.",
+    nav_home: "Home",
+    nav_report_lost: "I lost an item",
+    nav_report_found: "I found an item",
+    nav_matches: "Matches & History",
+    language_label: "Language",
+    language_en: "English",
+    language_ar: "Arabic",
+
+    home_hero_title: "Lost something in Dubai?",
+    home_hero_subtitle: "Upload a photo, select where and when, and let AI search for matches across the city.",
+    home_cta_lost: "Report a lost item",
+    home_cta_found: "Report a found item",
+
+    lost_page_title: "Report a Lost Item",
+    lost_page_subtitle: "Upload a photo and add a few details. Our AI will search for possible matches among reported found items.",
+    lost_form_item_photo: "Item photo",
+    lost_form_where_question: "Where did you lose it?",
+    lost_form_when_question: "When did you lose it?",
+    lost_form_location_type_placeholder: "Select a location type",
+    lost_form_time_frame_placeholder: "Select a time frame",
+    lost_form_specific_place: "Specific place (optional)",
+    lost_form_specific_place_placeholder: "e.g., Dubai Mall, Level 2",
+    lost_form_notes_label: "Short description (optional)",
+    lost_form_notes_placeholder: "Black leather wallet with a silver keychain.",
+    lost_form_submit: "Find possible matches",
+    lost_form_submitting: "Searching...",
+    lost_ai_matches_title: "AI suggested matches",
+    lost_ai_matches_empty: "No matches yet. Once similar items are reported, they will appear here.",
+    lost_matches_found: "We found {count} possible match(es)",
+    lost_upload_click: "Click to upload or drag and drop",
+    lost_upload_formats: "PNG, JPG up to 10MB",
+    lost_remove_image: "Remove image",
+
+    found_page_title: "Report a Lost Item",
+    found_page_subtitle: "Upload a photo of the item you found and tell us where and when. We'll check if anyone has reported it as lost.",
+    found_form_where_question: "Where did you find it?",
+    found_form_when_question: "When did you find it?",
+    found_form_submit: "Check for owners",
+    found_form_submitting: "Checking...",
+    found_ai_matches_title: "Possible owners",
+    found_ai_matches_empty: "No potential owners yet. We'll suggest matches as lost items are reported.",
+    found_matches_found: "We found {count} possible owner(s)",
+
+    matches_page_title: "My matches & activity",
+    matches_tab_lost: "Lost items I reported",
+    matches_tab_found: "Found items I reported",
+    matches_no_items_lost: "You haven't reported any lost items yet.",
+    matches_no_items_found: "You haven't reported any found items yet.",
+    matches_match_high: "High match",
+    matches_match_possible: "Possible match",
+    matches_similarity: "Similarity",
+    matches_reported: "Reported",
+    matches_location: "Location",
+
+    privacy_note: "Privacy note:",
+    privacy_banner: "In the full version, faces and IDs will be automatically blurred before processing.",
+    
+    location_mall: "Mall",
+    location_taxi: "Taxi",
+    location_metro: "Metro",
+    location_airport: "Airport",
+    location_school: "School / University",
+    location_event: "Event / Venue",
+    location_street: "Street / Public Area",
+    location_other: "Other",
+
+    time_today: "Today",
+    time_yesterday: "Yesterday",
+    time_last_3_days: "Last 3 days",
+    time_last_week: "Last week",
+    time_earlier: "Earlier",
+
+    // Home page - How It Works
+    home_how_it_works_title: "How It Works",
+    home_step_1_title: "Step 1",
+    home_step_1_heading: "Upload Photo",
+    home_step_1_desc: "Take a photo of the lost or found item.",
+    home_step_2_title: "Step 2",
+    home_step_2_heading: "Add Where & When",
+    home_step_2_desc: "Select where and when it was lost or found.",
+    home_step_3_title: "Step 3",
+    home_step_3_heading: "AI Matches",
+    home_step_3_desc: "Our AI compares your photo against existing posts.",
+    home_step_4_title: "Step 4",
+    home_step_4_heading: "Connect",
+    home_step_4_desc: "If there's a match, you can coordinate a safe return.",
+
+    // Home page - Why Dubai Needs This
+    home_why_title: "Why Dubai Needs This",
+    home_why_citywide_title: "City-wide, not per-venue",
+    home_why_citywide_desc: "One unified platform for all of Dubai, instead of separate systems for malls, taxis, metros, and airports.",
+    home_why_ai_title: "Real visual AI, not manual scrolling",
+    home_why_ai_desc: "Computer vision matches items automatically—no need to browse through hundreds of text descriptions.",
+    home_why_privacy_title: "Privacy-first design",
+    home_why_privacy_desc: "Built for residents and tourists with automatic face and ID blurring to protect personal information.",
+
+    // Footer
+    home_footer: "Prototype for Create Apps Championship – Dubai Chamber of Digital Economy",
+  },
+  ar: {
+    app_title: "نظام دبي للعثور على المفقودات بالذكاء الاصطناعي",
+    app_tagline: "منصّة آمنة تعتمد على الذكاء الاصطناعي للمفقودات في دبي.",
+    nav_home: "الرئيسية",
+    nav_report_lost: "أضعت غرضًا",
+    nav_report_found: "وجدت غرضًا",
+    nav_matches: "التطابقات وسجل البلاغات",
+    language_label: "اللغة",
+    language_en: "الإنجليزية",
+    language_ar: "العربية",
+
+    home_hero_title: "أضعت شيئًا في دبي؟",
+    home_hero_subtitle: "ارفع صورة للغرض، وحدد المكان والوقت، ودع الذكاء الاصطناعي يبحث عن أقرب التطابقات.",
+    home_cta_lost: "الإبلاغ عن غرض مفقود",
+    home_cta_found: "الإبلاغ عن غرض معثور عليه",
+
+    lost_page_title: "الإبلاغ عن غرض مفقود",
+    lost_page_subtitle: "ارفع صورة للغرض وأخبرنا أين ومتى فُقد. سيبحث الذكاء الاصطناعي عن تطابقات محتملة.",
+    lost_form_item_photo: "صورة الغرض",
+    lost_form_where_question: "أين فقدت الغرض؟",
+    lost_form_when_question: "متى فقدت الغرض؟",
+    lost_form_location_type_placeholder: "اختر نوع الموقع",
+    lost_form_time_frame_placeholder: "اختر الفترة الزمنية",
+    lost_form_specific_place: "المكان المحدد (اختياري)",
+    lost_form_specific_place_placeholder: "مثال: دبي مول، الطابق الثاني",
+    lost_form_notes_label: "وصف قصير (اختياري)",
+    lost_form_notes_placeholder: "محفظة جلدية سوداء مع حلقة مفاتيح فضية.",
+    lost_form_submit: "ابحث عن تطابقات محتملة",
+    lost_form_submitting: "جارٍ البحث...",
+    lost_ai_matches_title: "تطابقات مقترحة بالذكاء الاصطناعي",
+    lost_ai_matches_empty: "لا توجد تطابقات بعد. ستظهر العناصر المشابهة هنا عند الإبلاغ عنها.",
+    lost_matches_found: "وجدنا {count} تطابق محتمل",
+    lost_upload_click: "انقر للرفع أو اسحب وأفلت",
+    lost_upload_formats: "PNG، JPG حتى 10 ميجابايت",
+    lost_remove_image: "إزالة الصورة",
+
+    found_page_title: "الإبلاغ عن غرض معثور عليه",
+    found_page_subtitle: "ارفع صورة للغرض الذي وجدته وأخبرنا أين ومتى. سنتحقق إذا أبلغ أحد عنه كمفقود.",
+    found_form_where_question: "أين وجدت الغرض؟",
+    found_form_when_question: "متى وجدت الغرض؟",
+    found_form_submit: "ابحث عن أصحاب محتملين",
+    found_form_submitting: "جارٍ التحقق...",
+    found_ai_matches_title: "أصحاب محتملون",
+    found_ai_matches_empty: "لا يوجد أصحاب محتملون حتى الآن. سنقترح تطابقات عند الإبلاغ عن أغراض مفقودة.",
+    found_matches_found: "وجدنا {count} صاحب محتمل",
+
+    matches_page_title: "تطابقاتي وسجل البلاغات",
+    matches_tab_lost: "الأغراض التي أبلغت عنها كمفقودة",
+    matches_tab_found: "الأغراض التي أبلغت عنها كمَعثور عليها",
+    matches_no_items_lost: "لم تقم بالإبلاغ عن أي أغراض مفقودة بعد.",
+    matches_no_items_found: "لم تقم بالإبلاغ عن أي أغراض مَعثور عليها بعد.",
+    matches_match_high: "تطابق عالي",
+    matches_match_possible: "تطابق محتمل",
+    matches_similarity: "نسبة التطابق",
+    matches_reported: "تاريخ الإبلاغ",
+    matches_location: "الموقع",
+
+    privacy_note: "ملاحظة الخصوصية:",
+    privacy_banner: "في النسخة الكاملة، سيتم طمس الوجوه والهويات تلقائيًا قبل المعالجة.",
+    
+    location_mall: "مركز تجاري",
+    location_taxi: "سيارة أجرة",
+    location_metro: "المترو",
+    location_airport: "المطار",
+    location_school: "مدرسة / جامعة",
+    location_event: "فعالية / مكان",
+    location_street: "شارع / مكان عام",
+    location_other: "أخرى",
+
+    time_today: "اليوم",
+    time_yesterday: "أمس",
+    time_last_3_days: "آخر 3 أيام",
+    time_last_week: "الأسبوع الماضي",
+    time_earlier: "قبل ذلك",
+
+    // Home page - How It Works
+    home_how_it_works_title: "كيف يعمل",
+    home_step_1_title: "الخطوة 1",
+    home_step_1_heading: "ارفع صورة",
+    home_step_1_desc: "التقط صورة للغرض المفقود أو المعثور عليه.",
+    home_step_2_title: "الخطوة 2",
+    home_step_2_heading: "أضف أين ومتى",
+    home_step_2_desc: "حدد أين ومتى فُقد أو عُثر عليه.",
+    home_step_3_title: "الخطوة 3",
+    home_step_3_heading: "تطابقات بالذكاء الاصطناعي",
+    home_step_3_desc: "يقارن الذكاء الاصطناعي صورتك مع المنشورات الموجودة.",
+    home_step_4_title: "الخطوة 4",
+    home_step_4_heading: "اتصل",
+    home_step_4_desc: "إذا كان هناك تطابق، يمكنك تنسيق إعادة آمنة.",
+
+    // Home page - Why Dubai Needs This
+    home_why_title: "لماذا تحتاج دبي لهذا",
+    home_why_citywide_title: "على مستوى المدينة، وليس لكل مكان",
+    home_why_citywide_desc: "منصة موحدة لجميع أنحاء دبي، بدلاً من أنظمة منفصلة للمولات وسيارات الأجرة والمترو والمطارات.",
+    home_why_ai_title: "ذكاء اصطناعي بصري حقيقي، وليس تصفح يدوي",
+    home_why_ai_desc: "تطابق الرؤية الحاسوبية الأغراض تلقائيًا—لا حاجة لتصفح مئات الأوصاف النصية.",
+    home_why_privacy_title: "تصميم يراعي الخصوصية أولاً",
+    home_why_privacy_desc: "مصمم للمقيمين والسياح مع طمس تلقائي للوجوه والهويات لحماية المعلومات الشخصية.",
+
+    // Footer
+    home_footer: "نموذج أولي لبطولة إنشاء التطبيقات – غرفة دبي للاقتصاد الرقمي",
+  },
+};
+
+/**
+ * Translate a key to the current language
+ * Falls back to English if key not found
+ */
+export function translate(lang: SupportedLanguage, key: string): string {
+  const dict = translations[lang] ?? translations.en;
+  return dict[key] ?? translations.en[key] ?? key;
+}

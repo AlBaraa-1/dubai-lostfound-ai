@@ -1,4 +1,5 @@
-import { Search, Home, Upload, History } from 'lucide-react';
+import { Search, Home, Upload, History, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export type View = 'home' | 'report-lost' | 'report-found' | 'matches';
 
@@ -8,11 +9,13 @@ interface NavigationProps {
 }
 
 export default function Navigation({ currentView, onNavigate }: NavigationProps) {
+  const { lang, setLang, t } = useLanguage();
+
   const navItems = [
-    { id: 'home' as View, label: 'Home', icon: Home },
-    { id: 'report-lost' as View, label: 'Report Lost', icon: Search },
-    { id: 'report-found' as View, label: 'Report Found', icon: Upload },
-    { id: 'matches' as View, label: 'Matches / History', icon: History },
+    { id: 'home' as View, label: t('nav_home'), icon: Home },
+    { id: 'report-lost' as View, label: t('nav_report_lost'), icon: Search },
+    { id: 'report-found' as View, label: t('nav_report_found'), icon: Upload },
+    { id: 'matches' as View, label: t('nav_matches'), icon: History },
   ];
 
   return (
@@ -25,11 +28,11 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
             className="flex items-center gap-2 text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
           >
             <Search className="w-6 h-6" />
-            <span className="hidden sm:inline">Dubai AI Lost & Found</span>
+            <span className="hidden sm:inline">{t('app_title')}</span>
             <span className="sm:hidden">Dubai L&F</span>
           </button>
 
-          {/* Navigation Links */}
+          {/* Navigation Links + Language Toggle */}
           <div className="flex items-center gap-2 sm:gap-4">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -49,6 +52,30 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
                 </button>
               );
             })}
+
+            {/* Language Toggle */}
+            <div className="flex items-center gap-2 border-l pl-2 sm:pl-4 ml-2 sm:ml-4 border-gray-200">
+              <Globe className="w-4 h-4 text-gray-500 hidden sm:block" />
+              <button
+                type="button"
+                className={`text-xs sm:text-sm ${
+                  lang === 'en' ? 'font-semibold text-blue-600' : 'text-gray-500 hover:text-gray-700'
+                }`}
+                onClick={() => setLang('en')}
+              >
+                EN
+              </button>
+              <span className="text-gray-300">|</span>
+              <button
+                type="button"
+                className={`text-xs sm:text-sm ${
+                  lang === 'ar' ? 'font-semibold text-blue-600' : 'text-gray-500 hover:text-gray-700'
+                }`}
+                onClick={() => setLang('ar')}
+              >
+                ع
+              </button>
+            </div>
           </div>
         </div>
       </div>
