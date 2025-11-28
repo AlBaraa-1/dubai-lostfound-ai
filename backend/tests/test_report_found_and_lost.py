@@ -30,6 +30,10 @@ def test_report_found_item(
         }
     )
     
+    # Debug: Print error if not 201
+    if response.status_code != 201:
+        print(f"\n❌ Error {response.status_code}: {response.text}")
+    
     assert response.status_code == 201
     
     data = response.json()
@@ -76,6 +80,8 @@ def test_report_lost_item(
         }
     )
     
+    if response.status_code != 201:
+        print(f"\n❌ Error response: {response.text}")
     assert response.status_code == 201
     
     data = response.json()
@@ -121,6 +127,8 @@ def test_report_found_and_lost_with_matching(
         }
     )
     
+    if response_found.status_code != 201:
+        print(f"\n❌ Found item error: {response_found.text}")
     assert response_found.status_code == 201
     found_data = response_found.json()
     assert found_data["item"]["type"] == "found"
@@ -140,6 +148,8 @@ def test_report_found_and_lost_with_matching(
         }
     )
     
+    if response_lost.status_code != 201:
+        print(f"\n❌ Lost item error: {response_lost.text}")
     assert response_lost.status_code == 201
     lost_data = response_lost.json()
     

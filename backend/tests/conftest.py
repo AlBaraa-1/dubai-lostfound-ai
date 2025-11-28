@@ -43,8 +43,15 @@ def test_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+        engine.dispose()  # Properly close all connections
         os.close(db_fd)
-        os.unlink(db_path)
+        import time
+        time.sleep(0.1)  # Give Windows time to release file handle
+        try:
+            os.unlink(db_path)
+        except PermissionError:
+            # On Windows, if file is still locked, ignore (temp files cleanup anyway)
+            pass
 
 
 @pytest.fixture(scope="function")

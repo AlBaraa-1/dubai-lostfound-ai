@@ -16,6 +16,7 @@ pydantic-settings==2.1.0
 torch==2.2.0
 torchvision==0.17.0
 pillow==10.2.0
+numpy<2.0  # PyTorch 2.2.0 requires NumPy 1.x
 
 # Testing
 pytest==7.4.3
