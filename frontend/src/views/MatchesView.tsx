@@ -162,7 +162,7 @@ export default function MatchesView() {
         {/* Hidden Reset Button - Hover top-right corner to reveal */}
         <button
           onClick={handleResetDatabase}
-          className="absolute top-0 right-0 opacity-0 hover:opacity-100 transition-opacity duration-300 p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
+          className="absolute top-0 right-0 opacity-30 hover:opacity-100 transition-opacity duration-300 p-2 bg-red-100 text-red-600 hover:text-red-800 hover:bg-red-200 rounded-lg shadow-sm"
           title="Reset Database (Admin)"
         >
           <Trash2 className="w-5 h-5" />
