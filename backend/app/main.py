@@ -101,6 +101,23 @@ async def health_check() -> schemas.HealthResponse:
     )
 
 
+@app.delete("/api/reset", tags=["admin"])
+async def reset_database():
+    """
+    Clear all items from the database. Use for testing/demos.
+    """
+    from app.database import SessionLocal
+    from app.models import Item
+    
+    db = SessionLocal()
+    try:
+        count = db.query(Item).delete()
+        db.commit()
+        return {"message": f"Database cleared successfully. Deleted {count} items."}
+    finally:
+        db.close()
+
+
 # ===== Main Entry Point =====
 
 if __name__ == "__main__":
