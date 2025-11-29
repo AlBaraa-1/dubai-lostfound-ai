@@ -1,5 +1,6 @@
 /**
- * Translations for Dubai AI Lost & Found
+ * Translations for Mafqood - مفقود
+ * Dubai's AI-Powered Lost & Found Platform
  * Supports English (EN) and Arabic (AR)
  */
 
@@ -7,8 +8,8 @@ export type SupportedLanguage = "en" | "ar";
 
 export const translations: Record<SupportedLanguage, Record<string, string>> = {
   en: {
-    app_title: "Dubai AI Lost & Found",
-    app_tagline: "Privacy-first, AI-powered lost & found platform for Dubai.",
+    app_title: "Mafqood",
+    app_tagline: "Dubai's AI-powered platform to reunite lost items with their owners.",
     nav_home: "Home",
     nav_report_lost: "I lost an item",
     nav_report_found: "I found an item",
@@ -42,12 +43,22 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     lost_upload_formats: "PNG, JPG up to 10MB",
     lost_remove_image: "Remove image",
 
-    found_page_title: "Report a Lost Item",
+    found_page_title: "Report a Found Item",
     found_page_subtitle: "Upload a photo of the item you found and tell us where and when. We'll check if anyone has reported it as lost.",
+    found_form_item_photo: "Item photo",
     found_form_where_question: "Where did you find it?",
     found_form_when_question: "When did you find it?",
+    found_form_location_type_placeholder: "Select a location type",
+    found_form_time_frame_placeholder: "Select a time frame",
+    found_form_specific_place: "Specific place (optional)",
+    found_form_specific_place_placeholder: "e.g., Dubai Mall, Level 2",
+    found_form_notes_label: "Short description (optional)",
+    found_form_notes_placeholder: "Black leather wallet with a silver keychain.",
     found_form_submit: "Check for owners",
     found_form_submitting: "Checking...",
+    found_upload_click: "Click to upload or drag and drop",
+    found_upload_formats: "PNG, JPG up to 10MB",
+    found_remove_image: "Remove image",
     found_ai_matches_title: "Possible owners",
     found_ai_matches_empty: "No potential owners yet. We'll suggest matches as lost items are reported.",
     found_matches_found: "We found {count} possible owner(s)",
@@ -109,8 +120,8 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     home_footer: "Prototype for Create Apps Championship – Dubai Chamber of Digital Economy",
   },
   ar: {
-    app_title: "نظام دبي للعثور على المفقودات بالذكاء الاصطناعي",
-    app_tagline: "منصّة آمنة تعتمد على الذكاء الاصطناعي للمفقودات في دبي.",
+    app_title: "مفقود",
+    app_tagline: "منصة دبي الذكية لإعادة الأغراض المفقودة إلى أصحابها.",
     nav_home: "الرئيسية",
     nav_report_lost: "أضعت غرضًا",
     nav_report_found: "وجدت غرضًا",
@@ -146,10 +157,20 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
 
     found_page_title: "الإبلاغ عن غرض معثور عليه",
     found_page_subtitle: "ارفع صورة للغرض الذي وجدته وأخبرنا أين ومتى. سنتحقق إذا أبلغ أحد عنه كمفقود.",
+    found_form_item_photo: "صورة الغرض",
     found_form_where_question: "أين وجدت الغرض؟",
     found_form_when_question: "متى وجدت الغرض؟",
+    found_form_location_type_placeholder: "اختر نوع الموقع",
+    found_form_time_frame_placeholder: "اختر الفترة الزمنية",
+    found_form_specific_place: "المكان المحدد (اختياري)",
+    found_form_specific_place_placeholder: "مثال: دبي مول، الطابق الثاني",
+    found_form_notes_label: "وصف قصير (اختياري)",
+    found_form_notes_placeholder: "محفظة جلدية سوداء مع حلقة مفاتيح فضية.",
     found_form_submit: "ابحث عن أصحاب محتملين",
     found_form_submitting: "جارٍ التحقق...",
+    found_upload_click: "انقر للرفع أو اسحب وأفلت",
+    found_upload_formats: "PNG، JPG حتى 10 ميجابايت",
+    found_remove_image: "إزالة الصورة",
     found_ai_matches_title: "أصحاب محتملون",
     found_ai_matches_empty: "لا يوجد أصحاب محتملون حتى الآن. سنقترح تطابقات عند الإبلاغ عن أغراض مفقودة.",
     found_matches_found: "وجدنا {count} صاحب محتمل",
