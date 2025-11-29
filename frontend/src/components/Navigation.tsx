@@ -25,11 +25,9 @@ export default function Navigation({ currentView, onNavigate }: NavigationProps)
           {/* Logo / App Name */}
           <button
             onClick={() => onNavigate('home')}
-            className="flex items-center gap-2 text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <Search className="w-6 h-6" />
-            <span className="hidden sm:inline">{t('app_title')}</span>
-            <span className="sm:hidden">Dubai L&F</span>
+            <img src="/logo.svg" alt="Mafqood" className="h-10 w-auto" />
           </button>
 
           {/* Navigation Links + Language Toggle */}
