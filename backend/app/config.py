@@ -2,16 +2,17 @@
 Configuration settings for Dubai AI Lost & Found backend.
 """
 
+import os
 from pathlib import Path
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = Path(os.getenv("MEDIA_ROOT", str(BASE_DIR / "media")))
 LOST_DIR = MEDIA_ROOT / "lost"
 FOUND_DIR = MEDIA_ROOT / "found"
 
 # Database
-DATABASE_URL = f"sqlite:///{BASE_DIR / 'dubai_lostfound.db'}"
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'dubai_lostfound.db'}")
 
 # API Settings
 API_V1_PREFIX = "/api"
@@ -20,12 +21,19 @@ VERSION = "0.1.0"
 DESCRIPTION = "Privacy-first, AI-powered lost & found platform for Dubai"
 
 # CORS Settings
+# Allow Railway deployment URL to be added via environment variable
+ALLOWED_ORIGINS_ENV = os.getenv("ALLOWED_ORIGINS", "")
 ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite dev server
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
 ]
+
+# Add additional origins from environment variable
+if ALLOWED_ORIGINS_ENV:
+    additional_origins = [origin.strip() for origin in ALLOWED_ORIGINS_ENV.split(",") if origin.strip()]
+    ALLOWED_ORIGINS.extend(additional_origins)
 
 # Image Settings
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}

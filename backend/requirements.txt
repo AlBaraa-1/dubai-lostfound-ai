@@ -13,8 +13,9 @@ pydantic==2.5.3
 pydantic-settings==2.1.0
 
 # AI / ML
-torch==2.2.0
-torchvision==0.17.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.0+cpu
+torchvision==0.17.0+cpu
 pillow==10.2.0
 numpy<2.0  # PyTorch 2.2.0 requires NumPy 1.x
 
