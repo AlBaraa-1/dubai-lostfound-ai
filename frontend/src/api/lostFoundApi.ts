@@ -167,3 +167,23 @@ export async function fetchHistory(): Promise<HistoryResponse> {
   const data: HistoryResponse = await response.json();
   return data;
 }
+
+/**
+ * Reset/clear the entire database (admin function for testing).
+ * 
+ * @returns Success message with count of deleted items
+ * @throws Error if the request fails
+ */
+export async function resetDatabase(): Promise<{ message: string }> {
+  const response = await fetch(`${API_BASE_URL}/api/reset`, {
+    method: "DELETE",
+  });
+  
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => "Unknown error");
+    throw new Error(`Failed to reset database: ${response.status} - ${errorText}`);
+  }
+  
+  const data = await response.json();
+  return data;
+}

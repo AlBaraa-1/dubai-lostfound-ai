@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Trash2 } from 'lucide-react';
 import { Item, Match } from '../types';
-import { fetchHistory, buildImageUrl, HistoryResponse, ItemInDBBase } from '../api/lostFoundApi';
+import { fetchHistory, buildImageUrl, HistoryResponse, ItemInDBBase, resetDatabase } from '../api/lostFoundApi';
 import MatchCard from '../components/MatchCard';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -31,6 +31,25 @@ export default function MatchesView() {
   useEffect(() => {
     loadActivity();
   }, []);
+
+  const handleResetDatabase = async () => {
+    if (!confirm('⚠️ This will delete ALL items from the database. Continue?')) {
+      return;
+    }
+    
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      await resetDatabase();
+      // Reload activity after reset
+      await loadActivity();
+    } catch (error) {
+      console.error('Error resetting database:', error);
+      setError(error instanceof Error ? error.message : 'Failed to reset database');
+      setIsLoading(false);
+    }
+  };
 
   const loadActivity = async () => {
     setIsLoading(true);
@@ -132,13 +151,22 @@ export default function MatchesView() {
 
   return (
     <div className="max-w-6xl mx-auto" dir={dir}>
-      <div className="mb-8">
+      <div className="mb-8 relative">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
           {t('matches_page_title')}
         </h1>
         <p className="text-lg text-gray-600">
           View your reported items and see potential matches from our AI system.
         </p>
+        
+        {/* Hidden Reset Button - Hover top-right corner to reveal */}
+        <button
+          onClick={handleResetDatabase}
+          className="absolute top-0 right-0 opacity-0 hover:opacity-100 transition-opacity duration-300 p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
+          title="Reset Database (Admin)"
+        >
+          <Trash2 className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Tabs */}
