@@ -17,15 +17,35 @@ function App() {
   const renderView = () => {
     switch (currentView) {
       case 'home':
-        return <HomeView onNavigate={handleNavigate} />;
+        return (
+          <div key="home" className="animate-fadeIn">
+            <HomeView onNavigate={handleNavigate} />
+          </div>
+        );
       case 'report-lost':
-        return <ReportLostView />;
+        return (
+          <div key="report-lost" className="animate-fadeIn">
+            <ReportLostView />
+          </div>
+        );
       case 'report-found':
-        return <ReportFoundView />;
+        return (
+          <div key="report-found" className="animate-fadeIn">
+            <ReportFoundView />
+          </div>
+        );
       case 'matches':
-        return <MatchesView />;
+        return (
+          <div key="matches" className="animate-fadeIn">
+            <MatchesView />
+          </div>
+        );
       default:
-        return <HomeView onNavigate={handleNavigate} />;
+        return (
+          <div key="home-default" className="animate-fadeIn">
+            <HomeView onNavigate={handleNavigate} />
+          </div>
+        );
     }
   };
 

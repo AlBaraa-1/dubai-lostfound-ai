@@ -24,7 +24,7 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     home_cta_found: "Report a found item",
 
     lost_page_title: "Report a Lost Item",
-    lost_page_subtitle: "Upload a photo and add a few details. Our AI will search for possible matches among reported found items.",
+    lost_page_subtitle: "Upload a photo and add details. Our AI will search for matches among reported found items.",
     lost_form_item_photo: "Item photo",
     lost_form_where_question: "Where did you lose it?",
     lost_form_when_question: "When did you lose it?",
@@ -44,7 +44,7 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     lost_remove_image: "Remove image",
 
     found_page_title: "Report a Found Item",
-    found_page_subtitle: "Upload a photo of the item you found and tell us where and when. We'll check if anyone has reported it as lost.",
+    found_page_subtitle: "Upload a photo and tell us where and when. We'll check if it was reported lost.",
     found_form_item_photo: "Item photo",
     found_form_where_question: "Where did you find it?",
     found_form_when_question: "When did you find it?",
@@ -116,6 +116,97 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     home_why_privacy_title: "Privacy-first design",
     home_why_privacy_desc: "Built for residents and tourists with automatic face and ID blurring to protect personal information.",
 
+    // Success Modal - Lost Item
+    modal_lost_title: "Report Submitted",
+    modal_lost_subtitle: "Your lost item is now being monitored by AI",
+    modal_lost_scanned: "Our AI has scanned all found items in our database",
+    modal_lost_what_next: "What happens next",
+    modal_lost_step1_title: "AI Monitoring Active",
+    modal_lost_step1_desc: "Every time someone reports a found item, our AI automatically checks if it matches yours.",
+    modal_lost_step2_title: "Get Notified Instantly",
+    modal_lost_step2_desc: "When a match is found, you'll see it in your 'Matches & History' page.",
+    modal_lost_step3_title: "Contact & Retrieve",
+    modal_lost_step3_desc: "Review the match details and coordinate to get your item back.",
+    modal_view_matches: "View Matches",
+    modal_close: "Close",
+
+    // Matches Dashboard
+    matches_dashboard_subtitle: "Track your items and discover AI-powered matches",
+    matches_stat_lost_items: "Lost Items",
+    matches_stat_found_items: "Found Items",
+    matches_stat_total_matches: "Total Matches",
+    matches_stat_high_matches: "High Matches",
+    matches_empty_title: "No Items Yet",
+    matches_report_lost_btn: "Report Lost Item",
+    matches_report_found_btn: "Report Found Item",
+    matches_high_match_badge: "High Match!",
+    matches_match_count: "Match",
+    matches_match_count_plural: "Matches",
+    matches_reported_on: "Reported",
+    matches_ai_discovered: "AI Discovered Matches",
+    matches_strong_similarity: "Strong Similarity",
+    matches_view_all: "View all",
+    matches_no_matches_title: "No matches found yet",
+    matches_no_matches_desc: "Our AI is continuously monitoring for potential matches",
+    matches_lost_badge: "Lost",
+    matches_found_badge: "Found",
+    matches_lost_item: "Lost item",
+    matches_found_item: "Found item",
+    matches_possible_match: "Possible match",
+    matches_high_match: "High match",
+    matches_exact_match: "Exact match",
+    matches_view_details: "View details",
+
+    // Error/Retry
+    error_try_again: "Try again",
+    error_generic: "Something went wrong. Please try again.",
+    form_validation_error: "Please fill in all required fields: photo, where, and when.",
+    image_preview_alt: "Preview",
+
+    // Lost Page - AI Results Section
+    lost_ai_confidence_note: "AI-powered similarity matching (70%+ confidence)",
+    lost_matches_count_message: "🎯 Found {count} potential match(es)!",
+    lost_matches_review_hint: "Review each match and contact the finder if you recognize your item.",
+    lost_no_matches_title: "No Matches Found Yet",
+    lost_no_matches_desc: "Don't worry! Our AI is actively monitoring. When someone reports a similar found item, you'll be notified automatically.",
+    lost_pro_tip_title: "💡 Pro Tip:",
+    lost_pro_tip_desc: "Check back regularly or bookmark the 'Matches & History' page. New items are reported daily!",
+
+    // Found Page - AI Results Section
+    found_potential_owners_subtitle: "Potential owners searching for their items",
+    found_owners_count_message: "🎉 Great news! Found {count} potential owner(s)!",
+    found_owners_review_hint: "These people are looking for items similar to yours. They might be the rightful owners!",
+    found_no_matches_title: "No Matching Lost Reports Yet",
+    found_no_matches_desc: "Your found item is now in our system. When someone reports losing a similar item, they'll be connected with you automatically.",
+    found_thank_you_title: "💚 Thank You for Your Kindness!",
+    found_thank_you_desc: "You're helping reunite people with their belongings. Check 'Matches & History' periodically for updates.",
+
+    // Common Buttons
+    view_all_reports: "View All My Reports & Matches",
+    go_to_dashboard: "Go to My Dashboard",
+
+    // ItemCard
+    item_possible_matches: "possible match(es)",
+    item_view_matches: "View matches",
+
+    // Modal extra
+    modal_matches_found_message: "🎉 Great news! We found {count} potential match(es)!",
+    modal_owners_found_message: "🎉 Found {count} potential owner(s)!",
+    no_description: "No description",
+    reset_database: "Reset Database",
+
+    // Success Modal - Found Item
+    modal_found_title: "Report Submitted",
+    modal_found_subtitle: "Thank you for being a good samaritan 💚",
+    modal_found_scanned: "Our AI has scanned all lost items in our database",
+    modal_found_what_next: "What happens next",
+    modal_found_step1_title: "AI Matching Activated",
+    modal_found_step1_desc: "Your found item is now in our database. When someone reports a lost item, AI will check if it matches yours.",
+    modal_found_step2_title: "Owner Gets Notified",
+    modal_found_step2_desc: "If we find a match, the owner will be notified and can view your report.",
+    modal_found_step3_title: "Reunion Happens!",
+    modal_found_step3_desc: "Track matches in 'Matches & History' and help reunite owners with their belongings.",
+
     // Footer
     home_footer: "Prototype for Create Apps Championship – Dubai Chamber of Digital Economy",
   },
@@ -156,7 +247,7 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     lost_remove_image: "إزالة الصورة",
 
     found_page_title: "الإبلاغ عن غرض معثور عليه",
-    found_page_subtitle: "ارفع صورة للغرض الذي وجدته وأخبرنا أين ومتى. سنتحقق إذا أبلغ أحد عنه كمفقود.",
+    found_page_subtitle: "ارفع صورة وأخبرنا أين ومتى. سنتحقق إذا أبلغ عنه كمفقود.",
     found_form_item_photo: "صورة الغرض",
     found_form_where_question: "أين وجدت الغرض؟",
     found_form_when_question: "متى وجدت الغرض؟",
@@ -227,6 +318,97 @@ export const translations: Record<SupportedLanguage, Record<string, string>> = {
     home_why_ai_desc: "تطابق الرؤية الحاسوبية الأغراض تلقائيًا—لا حاجة لتصفح مئات الأوصاف النصية.",
     home_why_privacy_title: "تصميم يراعي الخصوصية أولاً",
     home_why_privacy_desc: "مصمم للمقيمين والسياح مع طمس تلقائي للوجوه والهويات لحماية المعلومات الشخصية.",
+
+    // Success Modal - Lost Item
+    modal_lost_title: "تم إرسال البلاغ",
+    modal_lost_subtitle: "الغرض المفقود الخاص بك تحت المراقبة بالذكاء الاصطناعي",
+    modal_lost_scanned: "قام الذكاء الاصطناعي بفحص جميع الأغراض المعثور عليها في قاعدة البيانات",
+    modal_lost_what_next: "ماذا يحدث بعد ذلك",
+    modal_lost_step1_title: "المراقبة بالذكاء الاصطناعي نشطة",
+    modal_lost_step1_desc: "في كل مرة يبلغ شخص عن غرض معثور عليه، يتحقق الذكاء الاصطناعي تلقائيًا إذا كان يطابق غرضك.",
+    modal_lost_step2_title: "احصل على إشعار فوري",
+    modal_lost_step2_desc: "عند العثور على تطابق، سيظهر في صفحة 'التطابقات وسجل البلاغات'.",
+    modal_lost_step3_title: "تواصل واستلم",
+    modal_lost_step3_desc: "راجع تفاصيل التطابق ونسق لاستعادة غرضك.",
+    modal_view_matches: "عرض التطابقات",
+    modal_close: "إغلاق",
+
+    // Matches Dashboard
+    matches_dashboard_subtitle: "تتبع أغراضك واكتشف التطابقات بالذكاء الاصطناعي",
+    matches_stat_lost_items: "الأغراض المفقودة",
+    matches_stat_found_items: "الأغراض المعثور عليها",
+    matches_stat_total_matches: "مجموع التطابقات",
+    matches_stat_high_matches: "التطابقات العالية",
+    matches_empty_title: "لا توجد أغراض بعد",
+    matches_report_lost_btn: "الإبلاغ عن غرض مفقود",
+    matches_report_found_btn: "الإبلاغ عن غرض معثور عليه",
+    matches_high_match_badge: "تطابق عالي!",
+    matches_match_count: "تطابق",
+    matches_match_count_plural: "تطابقات",
+    matches_reported_on: "تم الإبلاغ",
+    matches_ai_discovered: "تطابقات مكتشفة بالذكاء الاصطناعي",
+    matches_strong_similarity: "تشابه قوي",
+    matches_view_all: "عرض الكل",
+    matches_no_matches_title: "لم يتم العثور على تطابقات بعد",
+    matches_no_matches_desc: "الذكاء الاصطناعي يراقب باستمرار للعثور على تطابقات محتملة",
+    matches_lost_badge: "مفقود",
+    matches_found_badge: "معثور عليه",
+    matches_lost_item: "غرض مفقود",
+    matches_found_item: "غرض معثور عليه",
+    matches_possible_match: "تطابق محتمل",
+    matches_high_match: "تطابق عالي",
+    matches_exact_match: "تطابق تام",
+    matches_view_details: "عرض التفاصيل",
+
+    // Error/Retry
+    error_try_again: "حاول مرة أخرى",
+    error_generic: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    form_validation_error: "يرجى ملء جميع الحقول المطلوبة: الصورة، أين، ومتى.",
+    image_preview_alt: "معاينة",
+
+    // Lost Page - AI Results Section
+    lost_ai_confidence_note: "مطابقة بالذكاء الاصطناعي (ثقة 70%+)",
+    lost_matches_count_message: "🎯 وجدنا {count} تطابقات محتملة!",
+    lost_matches_review_hint: "راجع كل تطابق وتواصل مع الواجد إذا تعرفت على غرضك.",
+    lost_no_matches_title: "لم يتم العثور على تطابقات بعد",
+    lost_no_matches_desc: "لا تقلق! الذكاء الاصطناعي يراقب بنشاط. عندما يبلغ شخص عن غرض مشابه، سيتم إشعارك تلقائيًا.",
+    lost_pro_tip_title: "💡 نصيحة:",
+    lost_pro_tip_desc: "راجع بانتظام أو احفظ صفحة 'التطابقات وسجل البلاغات'. يتم الإبلاغ عن أغراض جديدة يوميًا!",
+
+    // Found Page - AI Results Section
+    found_potential_owners_subtitle: "أصحاب محتملون يبحثون عن أغراضهم",
+    found_owners_count_message: "🎉 أخبار رائعة! وجدنا {count} أصحاب محتملين!",
+    found_owners_review_hint: "هؤلاء الأشخاص يبحثون عن أغراض مشابهة لغرضك. قد يكونون الأصحاب الحقيقيين!",
+    found_no_matches_title: "لا توجد بلاغات مفقودة مطابقة بعد",
+    found_no_matches_desc: "الغرض المعثور عليه الآن في نظامنا. عندما يبلغ شخص عن فقدان غرض مشابه، سيتم ربطهم بك تلقائيًا.",
+    found_thank_you_title: "💚 شكرًا لك على لطفك!",
+    found_thank_you_desc: "أنت تساعد في إعادة الأغراض لأصحابها. راجع 'التطابقات وسجل البلاغات' بشكل دوري للتحديثات.",
+
+    // Common Buttons
+    view_all_reports: "عرض جميع بلاغاتي وتطابقاتي",
+    go_to_dashboard: "الذهاب إلى لوحة التحكم",
+
+    // ItemCard
+    item_possible_matches: "تطابقات محتملة",
+    item_view_matches: "عرض التطابقات",
+
+    // Modal extra
+    modal_matches_found_message: "🎉 أخبار رائعة! وجدنا {count} تطابقات محتملة!",
+    modal_owners_found_message: "🎉 وجدنا {count} أصحاب محتملين!",
+    no_description: "بدون وصف",
+    reset_database: "إعادة تعيين قاعدة البيانات",
+
+    // Success Modal - Found Item
+    modal_found_title: "تم إرسال البلاغ",
+    modal_found_subtitle: "شكرًا لك على كونك مواطنًا صالحًا 💚",
+    modal_found_scanned: "قام الذكاء الاصطناعي بفحص جميع الأغراض المفقودة في قاعدة البيانات",
+    modal_found_what_next: "ماذا يحدث بعد ذلك",
+    modal_found_step1_title: "تم تفعيل المطابقة بالذكاء الاصطناعي",
+    modal_found_step1_desc: "الغرض المعثور عليه الآن في قاعدة بياناتنا. عندما يبلغ شخص عن غرض مفقود، سيتحقق الذكاء الاصطناعي من مطابقته.",
+    modal_found_step2_title: "يتم إشعار المالك",
+    modal_found_step2_desc: "إذا وجدنا تطابقًا، سيتم إشعار المالك ويمكنه عرض بلاغك.",
+    modal_found_step3_title: "يحدث اللقاء!",
+    modal_found_step3_desc: "تتبع التطابقات في 'التطابقات وسجل البلاغات' وساعد في إعادة الأغراض لأصحابها.",
 
     // Footer
     home_footer: "نموذج أولي لبطولة إنشاء التطبيقات – غرفة دبي للاقتصاد الرقمي",
