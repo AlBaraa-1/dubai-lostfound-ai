@@ -5,7 +5,9 @@ Uses a pretrained CNN (ResNet18) from torchvision to extract feature vectors
 from images, then computes cosine similarity for matching.
 """
 
+import asyncio
 import math
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List, Tuple
 
@@ -15,6 +17,9 @@ from torchvision import models, transforms
 from PIL import Image
 
 from app.config import MODEL_NAME, EMBEDDING_DIM
+
+# Thread pool for CPU-intensive operations
+_executor = ThreadPoolExecutor(max_workers=2)
 
 
 # ===== Model Loading =====
@@ -99,7 +104,7 @@ def get_model() -> EmbeddingModel:
 
 def get_image_embedding(image_path: str | Path) -> List[float]:
     """
-    Load an image from disk and extract its embedding.
+    Load an image from disk and extract its embedding (synchronous).
     
     Args:
         image_path: Path to the image file
@@ -131,6 +136,27 @@ def get_image_embedding(image_path: str | Path) -> List[float]:
         
     except Exception as e:
         raise ValueError(f"Failed to process image {image_path}: {str(e)}")
+
+
+async def get_image_embedding_async(image_path: str | Path) -> List[float]:
+    """
+    Load an image from disk and extract its embedding (asynchronous).
+    
+    This function runs the CPU-intensive embedding computation in a thread pool
+    to avoid blocking the event loop.
+    
+    Args:
+        image_path: Path to the image file
+        
+    Returns:
+        List of float values representing the image embedding
+        
+    Raises:
+        FileNotFoundError: If the image file doesn't exist
+        ValueError: If the image cannot be loaded
+    """
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(_executor, get_image_embedding, image_path)
 
 
 # ===== Similarity Functions =====

@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 
 from app import crud, schemas, models
 from app.database import get_db
-from app.embeddings import get_image_embedding, find_top_matches
+from app.embeddings import get_image_embedding_async, find_top_matches
 from app.config import (
     LOST_DIR,
     FOUND_DIR,
@@ -162,12 +162,12 @@ async def report_lost_item(
     image_path = await save_upload_file(file, LOST_DIR)
     
     try:
-        # Compute embedding
+        # Compute embedding asynchronously (non-blocking)
         full_path = Path(image_path)
         if not full_path.is_absolute():
             full_path = LOST_DIR.parent / image_path
         
-        embedding = get_image_embedding(full_path)
+        embedding = await get_image_embedding_async(full_path)
         
         # Create item data
         item_data = schemas.ItemCreate(
@@ -231,12 +231,12 @@ async def report_found_item(
     image_path = await save_upload_file(file, FOUND_DIR)
     
     try:
-        # Compute embedding
+        # Compute embedding asynchronously (non-blocking)
         full_path = Path(image_path)
         if not full_path.is_absolute():
             full_path = FOUND_DIR.parent / image_path
         
-        embedding = get_image_embedding(full_path)
+        embedding = await get_image_embedding_async(full_path)
         
         # Create item data
         item_data = schemas.ItemCreate(
