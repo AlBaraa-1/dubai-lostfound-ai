@@ -263,8 +263,27 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
         <p className={`relative text-gray-600 text-base sm:text-lg font-medium mb-3 ${lang === 'ar' ? 'font-semibold text-lg' : ''}`}>
           {t('home_footer')}
         </p>
+        
+        {/* Legal & Contact Links */}
+        <div className={`relative flex flex-wrap justify-center gap-3 sm:gap-6 mb-4 text-sm sm:text-base ${lang === 'ar' ? 'font-semibold' : ''}`}>
+          <a href="/privacy-policy.html" className="text-blue-600 hover:text-blue-800 hover:underline transition-colors">
+            {lang === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+          </a>
+          <span className="text-gray-400">•</span>
+          <a href="/terms-of-service.html" className="text-blue-600 hover:text-blue-800 hover:underline transition-colors">
+            {lang === 'ar' ? 'شروط الخدمة' : 'Terms of Service'}
+          </a>
+          <span className="text-gray-400">•</span>
+          <a href="mailto:support@mafqood.albaraaalolabi.dev" className="text-blue-600 hover:text-blue-800 hover:underline transition-colors">
+            {lang === 'ar' ? 'اتصل بنا' : 'Contact Us'}
+          </a>
+        </div>
+        
         <p className={`relative text-gray-500 text-sm sm:text-base ${lang === 'ar' ? 'font-semibold' : ''}`}>
           {lang === 'ar' ? '© 2025 مفقود. صنع بـ ❤️ في دبي' : '© 2025 Mafqood. Made with ❤️ in Dubai'}
+        </p>
+        <p className={`relative text-gray-400 text-xs sm:text-sm mt-2 ${lang === 'ar' ? 'font-medium' : ''}`}>
+          {lang === 'ar' ? 'برنامج مفتوح المصدر مرخص بموجب MIT' : 'Open source software under MIT License'}
         </p>
       </footer>
     </div>
