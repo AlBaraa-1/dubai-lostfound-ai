@@ -28,6 +28,11 @@ ALLOWED_ORIGINS = [
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
+    "http://localhost:8081",  # Expo web
+    "http://127.0.0.1:8081",
+    "http://localhost:8082",  # Expo web alt port
+    "http://127.0.0.1:8082",
+    "http://localhost:19006", # Expo web legacy
 ]
 
 # Add additional origins from environment variable
